@@ -1,4 +1,3 @@
-app
 // Top level component that serves as the
 // framework for the entire application
 
