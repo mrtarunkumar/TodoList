@@ -7,7 +7,7 @@
   <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
   <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
   <!-- Pass data to the Todo component to render the Todo list -->
-  <todo v-for="todo in todos" v-bind:key="todo.title" :todo="todo" ></todo>
+  <todo v-on:delete-todo="deleteTodo" v-for="todo in todos" v-bind:key="todo.title" :todo="todo" ></todo>
 </div>
 </template>
 
@@ -22,6 +22,13 @@ export default {
   // reference to the Todo component in the compoents property
   components: {
     Todo
+  },
+  // Event handler to handle the delete
+  methods: {
+    deleteTodo (todo) {
+      const todoIndex = this.todos.indexOf(todo)
+      this.todos.splice(todoIndex, 1)
+    }
   }
 }
 </script>

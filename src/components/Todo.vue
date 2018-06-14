@@ -18,6 +18,11 @@
           <span class='right floated edit icon' v-on:click="showForm">
             <i class='edit icon'></i>
           </span>
+          <!-- Event handler on the delete span-->
+          <!-- This will trigger the deleteTodo method -->
+          <span class='right floated trash icon' v-on:click="deleteTodo(todo)">
+              <i class="trash icon"></i>
+          </span>
         </div>
     </div>
     <!-- show form when we are in edit mode -->
@@ -47,7 +52,7 @@
         Completed
       </div>
       <div class='ui bottom attached red basic button' v-show="!isEditing &&  !todo.done">
-        Complete
+        Pending
       </div>
   </div>
 </div>
@@ -58,7 +63,7 @@
 <script type = "text/javascript" >
 export default {
   props: ['todo'],
-  // Todo data have one properties: isEditing
+  // Todo data properties: isEditing
   // This is used to determine whether the
   // Todo application is in edit mode
   data () {
@@ -72,6 +77,9 @@ export default {
     },
     hideForm () {
       this.isEditing = false
+    },
+    deleteTodo (todo) {
+      this.$emit('delete-todo', todo)
     }
   }
 }
