@@ -32,11 +32,11 @@
           <label>Title</label>
           <!-- Bound the form values to the todo values -->
           <!-- Can edit and update the values -->
-          <input type='text' v-model="todo.title" >
+          <input type='text' v-model="todo.title"/>
         </div>
         <div class='field'>
           <label>Project</label>
-          <input type='text' v-model="todo.project" >
+          <input type='text' v-model="todo.project"/>
         </div>
         <div class='ui two button attached buttons'>
           <!-- Event handler on the close button -->
@@ -48,10 +48,12 @@
       </div>
     </div>
 
-      <div class='ui bottom attached green basic button' v-show="!isEditing && todo.done">
+      <div class='ui bottom attached green basic button' v-show="!isEditing && todo.done" disabled>
         Completed
       </div>
-      <div class='ui bottom attached red basic button' v-show="!isEditing &&  !todo.done">
+      <!-- Event handler on the pending button -->
+      <!-- This will trigger the completeTodo method -->
+      <div class='ui bottom attached red basic button' v-on:click="completeTodo(todo)" v-show="!isEditing &&  !todo.done">
         Pending
       </div>
   </div>
@@ -80,6 +82,9 @@ export default {
     },
     deleteTodo (todo) {
       this.$emit('delete-todo', todo)
+    },
+    completeTodo (todo) {
+      this.$emit('complete-todo', todo)
     }
   }
 }
